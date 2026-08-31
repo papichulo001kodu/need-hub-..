@@ -54,13 +54,17 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Sync Capacitor Android Project
-        run: npx cap sync android
+        run: |
+          npx cap sync android
+          # Ensure no conflicting png files exist in mipmap-anydpi-v26
+          rm -f android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.png
+          rm -f android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.png
 
       - name: Build Android Release APK
         run: |
           cd android
           chmod +x ./gradlew
-          ./gradlew assembleRelease --stacktrace
+          ./gradlew clean assembleRelease --stacktrace
 
       - name: Verify APK & Package Identifier
         run: |
