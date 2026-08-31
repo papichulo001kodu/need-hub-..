@@ -31,11 +31,24 @@ jobs:
       - name: Build Web Application
         run: npm run build
 
-      - name: Setup Java JDK (v17)
+      - name: Setup Java JDK (v21)
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '21'
+
+      - name: Verify Build Environment
+        run: |
+          echo "Node:"
+          node --version
+          echo "NPM:"
+          npm --version
+          echo "Java:"
+          java -version
+          echo "Javac:"
+          javac -version
+          echo "JAVA_HOME:"
+          echo "$JAVA_HOME"
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
@@ -59,6 +72,15 @@ jobs:
             exit 1
           fi
           echo "Found generated APK: $APK_FILE"
+          
+          # Verify package ID in manifest / capacitor config
+          PACKAGE_ID=$(grep -o 'applicationId "[^"]*"' android/app/build.gradle | cut -d'"' -f2)
+          echo "Configured Package ID: $PACKAGE_ID"
+          if [ "$PACKAGE_ID" != "com.needhub.app" ]; then
+            echo "::error::Package ID mismatch! Expected com.needhub.app but found $PACKAGE_ID"
+            exit 1
+          fi
+          
           cp "$APK_FILE" build-output/NeedHub-v1.0.0.apk
           ls -lh build-output/NeedHub-v1.0.0.apk
 
