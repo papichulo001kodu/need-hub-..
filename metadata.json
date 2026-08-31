@@ -1,0 +1,6 @@
+{
+  "name": "NeedHub",
+  "description": "Premium grocery and local home services ordering app with live cart, order tracking, dark mode, and secure role-based admin management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">NeedHub</string>
+    <string name="title_activity_main">NeedHub</string>
+    <string name="package_name">com.needhub.app</string>
+    <string name="custom_url_scheme">com.needhub.app</string>
+</resources>

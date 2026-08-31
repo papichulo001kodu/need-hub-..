@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>NeedHub - Grocery &amp; Home Services</title>
+    <meta name="description" content="NeedHub - Fast Grocery &amp; Essential Home Services Delivery" />
+    <meta name="theme-color" content="#059669" />
+    
+    <!-- PWA Web App Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="apple-touch-icon" href="/icon-512.png" />
+    
+    <!-- iOS Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="NeedHub" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- Early PWA Install Prompt Handler -->
+    <script>
+      window.__deferredPrompt = null;
+      window.addEventListener('beforeinstallprompt', function(e) {
+        console.log('[NeedHub PWA] 📲 beforeinstallprompt event captured in early inline script:', e);
+        e.preventDefault();
+        window.__deferredPrompt = e;
+        if (typeof window.__onPromptReady === 'function') {
+          window.__onPromptReady(e);
+        }
+      });
+
+      window.addEventListener('appinstalled', function(e) {
+        console.log('[NeedHub PWA] ✅ appinstalled event successfully received:', e);
+        window.__deferredPrompt = null;
+      });
+    </script>
+  </head>
+  <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-emerald-500 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
